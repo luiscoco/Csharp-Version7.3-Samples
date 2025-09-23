@@ -1,21 +1,125 @@
-# C# 7.3 Features (VS 2017)
+# C# 7.3 Features – Sample Projects
 
-This solution demonstrates the **notable C# 7.3 language features**.
+This repository contains hands-on examples of the new features introduced in **C# version 7.3**.  
+Each project (`P111`, `P112`, …) illustrates one feature with runnable code.
 
-## Projects
-- **P111_UnmanagedConstraint** — `where T : unmanaged` constraint.
-- **P112_EnumDelegateConstraints** — `where T : Enum`, `where T : Delegate` constraints.
-- **P113_TupleEquality** — `==` and `!=` for `System.ValueTuple`.
-- **P114_RefLocalReassignment** — Reassign `ref` locals.
-- **P115_InOverloadResolution** — Overload resolution prefers `in` when beneficial.
-- **P116_FieldTargetOnAutoProperty** — `[field: ...]` attributes on auto-property backing fields.
-- **P117_ConditionalRefExpression** — Conditional `ref` expression (`?:` returns by ref).
-- **P118_LeadingUnderscores** — Allow leading underscores in numeric literals (e.g., `0x_FF`).
+---
 
-## Build & Run
+## 🚀 New Features in C# 7.3
+
+### 1) Unmanaged generic constraint (`P111_UnmanagedConstraint`)
+- **What’s new**: Constrain generics to unmanaged (blittable) types.  
+- **Example**:
+  ```csharp
+  void Fill<T>(Span<T> span, T value) where T : unmanaged
+  {
+      for (int i = 0; i < span.Length; i++) span[i] = value;
+  }
+  ```
+
+---
+
+### 2) Enum & Delegate constraints (`P112_EnumDelegateConstraints`)
+- **What’s new**: Constrain generics to `Enum` or `Delegate`.  
+- **Example**:
+  ```csharp
+  static string[] Names<T>() where T : Enum => Enum.GetNames(typeof(T));
+  static void Invoke<T>(T d) where T : Delegate => d.DynamicInvoke();
+  ```
+
+---
+
+### 3) Tuple equality operators (`P113_TupleEquality`)
+- **What’s new**: Compare tuples with `==` / `!=`.  
+- **Example**:
+  ```csharp
+  var a = (1, 2);
+  var b = (1, 2);
+  Console.WriteLine(a == b); // True
+  ```
+
+---
+
+### 4) Ref local reassignment (`P114_RefLocalReassignment`)
+- **What’s new**: Reassign ref locals/parameters.  
+- **Example**:
+  ```csharp
+  ref int r = ref array[0];
+  r = ref array[1];
+  ```
+
+---
+
+### 5) Prefer `in` overload resolution (`P115_InOverloadResolution`)
+- **What’s new**: Overload resolution improved for `in` parameters.  
+- **Example**:
+  ```csharp
+  void M(in int x) { }
+  void M(object o) { }
+  int n = 42;
+  M(n); // prefers M(in int)
+  ```
+
+---
+
+### 6) `[field: ...]` target on auto-properties (`P116_FieldTargetOnAutoProperty`)
+- **What’s new**: Apply attributes to backing fields.  
+- **Example**:
+  ```csharp
+  [field: NonSerialized]
+  public string? Cache { get; private set; }
+  ```
+
+---
+
+### 7) Conditional ref expressions (`P117_ConditionalRefExpression`)
+- **What’s new**: Conditional operator `?:` supports ref returns.  
+- **Example**:
+  ```csharp
+  ref int Pick(bool left, ref int a, ref int b)
+      => ref (left ? ref a : ref b);
+  ```
+
+---
+
+### 8) Leading underscores in numeric literals (`P118_LeadingUnderscores`)
+- **What’s new**: Allow leading underscores in numeric literals.  
+- **Example**:
+  ```csharp
+  int hex = 0x_FF_FF;
+  int bin = 0b_1010_0001;
+  ```
+
+---
+
+## 📂 Repository Structure
+
+- `P111_UnmanagedConstraint` → unmanaged generics  
+- `P112_EnumDelegateConstraints` → Enum/Delegate constraints  
+- `P113_TupleEquality` → tuple equality  
+- `P114_RefLocalReassignment` → reassign ref locals  
+- `P115_InOverloadResolution` → overload resolution with in  
+- `P116_FieldTargetOnAutoProperty` → field-target attributes  
+- `P117_ConditionalRefExpression` → conditional ref  
+- `P118_LeadingUnderscores` → leading underscores in literals  
+
+---
+
+## 🔧 Requirements
+
+- .NET Framework / .NET Core projects with `<LangVersion>7.3</LangVersion>`  
+- Default for .NET Framework 4.7.2+ and .NET Core 2.1+  
+
+**Build & run:**
 ```bash
 dotnet restore
 dotnet build
 dotnet run --project P111_UnmanagedConstraint
 ```
-Targets `.NET 10.0` with `<LangVersion>7.3</LangVersion>`.
+
+---
+
+## 📖 References
+
+- Microsoft Docs – *C# language version history*  
+- .NET Blog – *What’s new in C# 7.3*  

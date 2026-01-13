@@ -92,20 +92,20 @@ Each project (`P115`, `P116`, …) illustrates one feature with runnable code.
 
 ---
 
-## 📂 Repository Structure
+## Repository Structure
 
-- `P111_UnmanagedConstraint` → unmanaged generics  
-- `P112_EnumDelegateConstraints` → Enum/Delegate constraints  
-- `P113_TupleEquality` → tuple equality  
-- `P114_RefLocalReassignment` → reassign ref locals  
-- `P115_InOverloadResolution` → overload resolution with in  
-- `P116_FieldTargetOnAutoProperty` → field-target attributes  
-- `P117_ConditionalRefExpression` → conditional ref  
-- `P118_LeadingUnderscores` → leading underscores in literals  
+- `P115_UnmanagedConstraint` → unmanaged generics  
+- `P116_EnumDelegateConstraints` → Enum/Delegate constraints  
+- `P117_TupleEquality` → tuple equality  
+- `P118_RefLocalReassignment` → reassign ref locals  
+- `P119_InOverloadResolution` → overload resolution with in  
+- `P120_FieldTargetOnAutoProperty` → field-target attributes  
+- `P121_ConditionalRefExpression` → conditional ref  
+- `P122_LeadingUnderscores` → leading underscores in literals  
 
 ---
 
-## 🔧 Requirements
+## Requirements
 
 - .NET Framework / .NET Core projects with `<LangVersion>7.3</LangVersion>`  
 - Default for .NET Framework 4.7.2+ and .NET Core 2.1+  
@@ -119,7 +119,7 @@ dotnet run --project P111_UnmanagedConstraint
 
 ---
 
-## 📖 References
+## References
 
 - Microsoft Docs – *C# language version history*  
 - .NET Blog – *What’s new in C# 7.3*  
